@@ -1,0 +1,23 @@
+diff --git a/src/server/database/Database/Implementation/WorldDatabase.h b/src/server/database/Database/Implementation/WorldDatabase.h
+--- a/src/server/database/Database/Implementation/WorldDatabase.h
++++ b/src/server/database/Database/Implementation/WorldDatabase.h
+@@ -xx,6 +xx,10 @@
+     WORLD_INS_GAMEOBJECT_ADDON,
+     WORLD_UPD_VERSION,
+
++    // GOMove module
++    GOMOVE_SEL_GOTEMPLATE_BY_ENTRY,
++    GOMOVE_SEL_GOTEMPLATE_BY_NAME,
++
+     MAX_WORLDDATABASE_STATEMENTS
+ };
+diff --git a/src/server/database/Database/Implementation/WorldDatabase.cpp b/src/server/database/Database/Implementation/WorldDatabase.cpp
+--- a/src/server/database/Database/Implementation/WorldDatabase.cpp
++++ b/src/server/database/Database/Implementation/WorldDatabase.cpp
+@@ -xx,6 +xx,10 @@
+     PrepareStatement(WORLD_UPD_VERSION, "UPDATE version SET core_version = ?, core_revision = ?", CONNECTION_ASYNC);
++
++    // GOMove module
++    PrepareStatement(GOMOVE_SEL_GOTEMPLATE_BY_ENTRY, "SELECT entry, name, displayId FROM gameobject_template WHERE entry = ? LIMIT 1", CONNECTION_SYNCH);
++    PrepareStatement(GOMOVE_SEL_GOTEMPLATE_BY_NAME, "SELECT entry, name, displayId FROM gameobject_template WHERE name LIKE ? LIMIT 500", CONNECTION_SYNCH);
+ }
